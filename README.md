@@ -1,8 +1,20 @@
 # avr-config
 
+[![Crates.io](https://img.shields.io/crates/v/avr-config.svg)](https://crates.io/crates/avr-config)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
+
 A foundational crate for retrieving details, such as the CPU clock frequency, at runtime.
 
 [API Documentation](https://docs.rs/avr-config)
+
+## Usage
+
+Add this to your `Cargo.toml`
+
+```
+avr-config = "1.0"
+```
 
 ## Features
 
