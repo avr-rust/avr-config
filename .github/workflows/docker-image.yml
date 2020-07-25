@@ -18,7 +18,10 @@ jobs:
       run:
         docker build . --file Dockerfile.ci --tag avr-rust/avr-config.ci:$GITHUB_RUN_NUMBER
 
-    - name: Compile the crate
+    - name: Compile the crate for AVR
       run:
-        docker run avr-rust/avr-config.ci:$GITHUB_RUN_NUMBER
+        docker run avr-rust/avr-config.ci:$GITHUB_RUN_NUMBER build -Z build-std=core --target avr-atmega328p.json --release
 
+    - name: Compile the crate and run tests for the host machine
+      run:
+        docker run avr-rust/avr-config.ci:$GITHUB_RUN_NUMBER test --all
