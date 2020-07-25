@@ -4,6 +4,12 @@ version = "0.1.0"
 authors = ["Dylan McKay <me@dylanmckay.io>"]
 edition = "2018"
 
+description = "An AVR foundational crate for retrieving details, such as the CPU clock frequency, at runtime"
+repository = "https://github.com/avr-rust/avr-config"
+documentation = "https://docs.rs/avr-config"
+categories = ["embedded"]
+license = "MIT"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
