@@ -19,5 +19,18 @@ fn main() {
 }
 ```
 
+No part of the compiler toolchain itself understands or knows about the CPU
+frequency of the target device - this is a user-level concern that only affects
+user code (such as a busy wait delay loop for timed sleeping).
+
+This crate is not strictly required for retrieving the clock frequency - any logic
+or environment variable will do. However, setting up the required clock frequency environment
+variables for all your dependent crates could be problematic if there are multiple ways of doing it,
+increasing the chance of forgetting one or getting into the situation where the frequencies are
+inconsistent and dependent crates execute at different speeds.
+
+This crate aims to provide the boilerplate for getting the CPU frequency as an integer
+at runtime, as well as establishes a convention that `$AVR_CPU_FREQUENCY_HZ` is used to
+pass the target frequency to all AVR crates, if they opt-in to it.
 
 
