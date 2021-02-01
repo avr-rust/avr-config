@@ -18,3 +18,6 @@ cpu-frequency = []
 
 [dependencies]
 const_env--value = "0.1"
+
+[package.metadata.docs.rs]
+all-features = true
