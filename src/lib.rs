@@ -12,8 +12,6 @@
 
 #![no_std]
 
-#[allow(unused_imports)] use const_env__value::value_from_env;
-
 #[cfg(feature = "cpu-frequency")]
 mod cpu_frequency;
 

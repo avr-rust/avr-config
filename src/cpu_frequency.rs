@@ -1,3 +1,5 @@
+#[allow(unused_imports)] use const_env__value::value_from_env;
+
 /// The clock frequency of the current AVR microcontroller (if the `cpu-frequency` crate feature is
 /// enabled).
 ///
