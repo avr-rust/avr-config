@@ -4,7 +4,7 @@
 //!
 //! # The `AVR_CPU_FREQUENCY_HZ` environment variable
 //!
-//! All crates that depend on this crate will require `$AVR_CPU_FREQUENCY_HZ` when targeting
+//! All crates that depend on this crate (with the `cpu-frequency` feature enabled) require `$AVR_CPU_FREQUENCY_HZ` when targeting
 //! AVR. The frequency will then be available in the `CPU_FREQUENCY_HZ` constant.
 //!
 //! It is not necessary to set this variable when AVR is not being targeted, for example,
@@ -14,33 +14,8 @@
 
 #[allow(unused_imports)] use const_env__value::value_from_env;
 
-/// The clock frequency of the current AVR microcontroller.
-///
-/// This value is set at compilation time.
-///
-/// This value is derived from the `$AVR_CPU_FREQUENCY_HZ` environment variable.
-///
-/// When this crate is compiled for a non-AVR target, this value simply becomes
-/// a reasonable default.
-pub const CPU_FREQUENCY_HZ: u32 = CPU_FREQUENCY_HZ_IMPL;
+#[cfg(feature = "cpu-frequency")]
+mod cpu_frequency;
 
-/// The default CPU frequency to assume when AVR is not being targeted.
-/// This allows the crate to work for tests, and allows generating without
-/// targeting AVR.
-#[allow(dead_code)]
-const DEFAULT_CPU_FREQUENCY_WHEN_NOT_AVR_HZ: u32 = 16_000_000;
-
-#[cfg(target_arch = "avr")]
-// N.B. the comment on the end of the next line is there because it will be seen in the compiler diagnostic.
-const CPU_FREQUENCY_HZ_IMPL: u32 = value_from_env!("AVR_CPU_FREQUENCY_HZ": u32); // Must be set whenever AVR is being targeted.
-#[cfg(not(target_arch = "avr"))]
-const CPU_FREQUENCY_HZ_IMPL: u32 = DEFAULT_CPU_FREQUENCY_WHEN_NOT_AVR_HZ;
-
-#[cfg(test)]
-mod test {
-    #[test]
-    fn cpu_frequency_is_nonzero() {
-        assert!(crate::CPU_FREQUENCY_HZ > 0);
-
-    }
-}
+#[cfg(feature = "cpu-frequency")]
+pub use self::cpu_frequency::*;
